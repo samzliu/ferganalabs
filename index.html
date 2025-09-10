@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fergana Labs</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #fff;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .header {
+            margin-bottom: 60px;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            display: block;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 300;
+            margin-bottom: 20px;
+            letter-spacing: -0.02em;
+        }
+
+        .tagline {
+            font-style: italic;
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 40px;
+        }
+
+        .section {
+            margin-bottom: 60px;
+            text-align: left;
+        }
+
+        .section h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #000;
+        }
+
+        .section p {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .product-card {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .product-card h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #000;
+        }
+
+        .contact-info {
+            background: #f8f9fa;
+            padding: 40px;
+            border-radius: 8px;
+            margin-top: 30px;
+        }
+
+        .contact-info h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #000;
+        }
+
+        .contact-info p {
+            margin-bottom: 10px;
+        }
+
+        .contact-info a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+
+        .footer {
+            margin-top: 80px;
+            padding-top: 40px;
+            border-top: 1px solid #eee;
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 15px;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <img src="logo-icon.png" alt="Fergana Labs Logo" class="logo">
+            <h1>Fergana Labs</h1>
+            <p class="tagline">Gradient descending down Fergana Valley</p>
+        </header>
+
+        <main>
+            <section class="section">
+                <h2>What we do</h2>
+                <p>Fergana Labs is building memory for consumer AI. Our mission is to enhance human agency by turning personal data into intelligence that works for, rather than against, you. Guided by a commitment to thoughtful design and beautiful products, we’re creating experiences where technology fades into the background and people come first.</p>
+            </section>
+
+            <section class="section">
+                <h2>Who we are</h2>
+                <p>We are a small team of builders and researchers based in San Francisco, CA.</p>
+            </section>
+
+            <section class="section">
+                <h2>Product Portfolio</h2>
+                <p>We're experimenting with several products, focusing on areas where personalized memory can make a big difference.</p>
+                
+                <div class="products-grid">
+                    <div class="product-card">
+                        <h3>Allegory</h3>
+                        <p>Notes that organize themselves. Desigend for people with ADHD.</p>
+                        <p><a href="https://www.allegory.to/" target="_blank">Allegory →</a></p>
+                    </div>
+                    
+                    <div class="product-card">
+                        <h3>Boozle</h3>
+                        <p>AI agent that lives in your text messages and Slack channels</p>
+                        <p><a href="https://www.getboozle.com" target="_blank">Boozle →</a></p>
+                    </div>
+                    
+                    <div class="product-card">
+                        <h3>Codeswitch</h3>
+                        <p>Exoskeleton for writing. Contextual autocomplete everywhere</p>
+                        <p><a href="https://www.getcodeswitch.com" target="_blank">Codeswitch →</a></p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>Contact</h2>
+                <p>Whether you're looking to work with us, invest in us, request a product, or just shoot the shit - we're always excited to chat: <a href="mailto:hi@ferganalabs.com">hi@ferganalabs.com</a>. Follow us on our journey at <a href="https://x.com/ferganalabs">https://x.com/ferganalabs</a></p>
+                
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; 2025 Fergana Labs. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>
