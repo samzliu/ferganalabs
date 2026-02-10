@@ -107,6 +107,77 @@
             color: #000;
         }
 
+        .product-hero {
+            margin-top: 16px;
+        }
+
+        .product-hero img {
+            width: 100%;
+            height: auto;
+            border-radius: 16px;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            box-shadow: 0 12px 36px rgba(0, 0, 0, 0.12);
+        }
+
+        .accordion {
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.85);
+            padding: 12px 18px;
+        }
+
+        .accordion summary {
+            font-size: 1rem;
+            font-weight: 400;
+            color: #333;
+            cursor: pointer;
+            list-style: none;
+        }
+
+        .accordion summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .accordion summary::after {
+            content: "＋";
+            float: right;
+            font-size: 1.1rem;
+            margin-top: 2px;
+        }
+
+        .accordion[open] summary::after {
+            content: "−";
+        }
+
+        .accordion-content {
+            padding-top: 12px;
+        }
+
+        .blog-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .blog-item {
+            padding: 16px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+        }
+
+        .blog-item h3 {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #000;
+        }
+
+        .blog-item p {
+            margin-bottom: 0;
+        }
+
         .contact-info {
             background: #f8f9fa;
             padding: 30px;
@@ -177,43 +248,78 @@
 
             <section class="section">
                 <h2>Product Portfolio</h2>
-                <p>Our focus areas are on where personalized memory can make a big difference. We're currently experimenting with several products:</p>
-                
-                <div class="products-grid">
-                    <div class="product-card">
-                        <h3>Allegory</h3>
-                        <p>Notes that organize themselves. Designed for people with ADHD.</p>
-                        <p><a href="https://www.allegory.to/" target="_blank">Allegory →</a></p>
-                    </div>
-                    
-                    <div class="product-card">
-                        <h3>Boozle</h3>
-                        <p>Your AI wingman for Slack.</p>
-                        <p><a href="https://www.getboozle.com" target="_blank">Boozle →</a></p>
-                    </div>
-                    
-                    <div class="product-card">
-                        <h3>Codeswitch</h3>
-                        <p>Exoskeleton for writing. Embedded AI everywhere.</p>
-                        <p><a href="https://www.getcodeswitch.com" target="_blank">Codeswitch →</a></p>
-                    </div>
+                <p>Our focus areas are on where personalized memory can make a big difference. <a href="https://stash.ac" target="_blank">Stash</a> is our current focus.</p>
+                <div class="product-hero">
+                    <a href="https://stash.ac" target="_blank">
+                        <img src="stash-screenshot.png" alt="Stash product screenshot">
+                    </a>
+                </div>
+                <details class="accordion">
+                    <summary>We've previous experimented with a few other areas</summary>
+                    <div class="accordion-content">
+                        <div class="products-grid">
+                            <div class="product-card">
+                                <h3>Allegory</h3>
+                                <p>Notes that organize themselves. Designed for people with ADHD.</p>
+                                <p><a href="https://www.allegory.to/" target="_blank">Allegory →</a></p>
+                            </div>
+                            
+                            <div class="product-card">
+                                <h3>Boozle</h3>
+                                <p>Your AI wingman for Slack.</p>
+                                <p><a href="https://www.getboozle.com" target="_blank">Boozle →</a></p>
+                            </div>
+                            
+                            <div class="product-card">
+                                <h3>Codeswitch</h3>
+                                <p>Exoskeleton for writing. Embedded AI everywhere.</p>
+                                <p><a href="https://www.getcodeswitch.com" target="_blank">Codeswitch →</a></p>
+                            </div>
 
-                    <div class="product-card">
-                        <h3>Caplog</h3>
-                        <p>Have podcast-style conversations with AI and generate documents from your discussions</p>
-                        <p><a href="https://x.com/ferganalabs/status/1971743821987004527" target="_blank">Caplog →</a></p>
-                    </div>
+                            <div class="product-card">
+                                <h3>Caplog</h3>
+                                <p>Have podcast-style conversations with AI and generate documents from your discussions</p>
+                                <p><a href="https://x.com/ferganalabs/status/1971743821987004527" target="_blank">Caplog →</a></p>
+                            </div>
 
-                    <div class="product-card">
-                        <h3>Stash</h3>
-                        <p>AI Chief of Staff</p>
-                        <p><a href="https://stash.ac" target="_blank">Stash →</a></p>
+                            <div class="product-card">
+                                <h3>Claude Agent Desktop</h3>
+                                <p>GUI wrapper built on top of Claude Agent SDK.</p>
+                                <p><a href="https://github.com/Fergana-Labs/claude_agent_desktop" target="_blank">Claude Agent Desktop →</a></p>
+                            </div>
+                        </div>
                     </div>
+                </details>
+            </section>
 
-                    <div class="product-card">
-                        <h3>Claude Agent Desktop</h3>
-                        <p>GUI wrapper built on top of Claude Agent SDK.</p>
-                        <p><a href="https://github.com/Fergana-Labs/claude_agent_desktop" target="_blank">Claude Agent Desktop →</a></p>
+            <section class="section">
+                <h2>Blog posts</h2>
+                <p>Writing on memory, research, and the messy human side of building products.</p>
+                <div class="blog-list">
+                    <div class="blog-item">
+                        <h3>I Dropped Out of My PhD</h3>
+                        <p>Choosing the start-up life over the academic path.</p>
+                        <p><a href="https://samzliu.substack.com/p/i-dropped-out-of-my-phd" target="_blank">Read →</a></p>
+                    </div>
+                    <div class="blog-item">
+                        <h3>Why Context Windows Won't Save Us</h3>
+                        <p>Why raw context length is not a substitute for true memory in AI.</p>
+                        <p><a href="https://samzliu.substack.com/p/why-context-windows-wont-save-us" target="_blank">Read →</a></p>
+                    </div>
+                    <div class="blog-item">
+                        <h3>In Praise of Mess</h3>
+                        <p>Embracing creative disorder as a feature, not a bug.</p>
+                        <p><a href="https://samzliu.substack.com/p/in-praise-of-mess" target="_blank">Read →</a></p>
+                    </div>
+                    <div class="blog-item">
+                        <h3>Why memory is critical</h3>
+                        <p>Why memory is critical in building useful AI products.</p>
+                        <p><a href="https://henrydowling.com/background-context.html" target="_blank">Read →</a></p>
+                    </div>
+                    <div class="blog-item">
+                        <h3>When it Wraps, it Rhymes</h3>
+                        <p>Predicting the future of AI by looking at the past.</p>
+                        <p><a href="https://x.com/samzliu/status/2021341001655423487" target="_blank">Read →</a></p>
                     </div>
                 </div>
             </section>
