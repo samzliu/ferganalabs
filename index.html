@@ -4,7 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fergana Labs</title>
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="octopus.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
+    <link rel="icon" href="favicon.ico" sizes="any">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
     <style>
         * {
             margin: 0;
@@ -16,221 +20,238 @@
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             line-height: 1.6;
             color: #333;
-            background-color: white;
-            background-image: url('green_valley_background.png');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
+            background-color: #faf9f6;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            height: 100vh;
+            height: 100dvh;
+            overflow: hidden;
+            overscroll-behavior: none;
         }
 
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 40px 20px;
-            text-align: center;
+        /* inner scroller: only the text moves, never the scene */
+        .scroll {
+            position: relative;
+            z-index: 1;
+            height: 100%;
+            overflow-y: auto;
+            overscroll-behavior: contain;
+            -webkit-overflow-scrolling: touch;
         }
 
-        .header {
-            margin-bottom: 40px;
+        /* --- Stylized Fergana Valley scene --- */
+        .scene {
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 46vh;
+            min-height: 260px;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
         }
 
-        .logo {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 20px;
+        .scene svg {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             display: block;
         }
 
+        .scene::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 90px;
+            background: linear-gradient(to bottom, #faf9f6, rgba(250, 249, 246, 0));
+            z-index: 2;
+        }
+
+        .cloud {
+            animation: drift 90s linear infinite;
+        }
+
+        .cloud--2 {
+            animation-duration: 130s;
+            animation-delay: -40s;
+        }
+
+        .cloud--3 {
+            animation-duration: 160s;
+            animation-delay: -95s;
+        }
+
+        @keyframes drift {
+            from { transform: translateX(-320px); }
+            to   { transform: translateX(1520px); }
+        }
+
+        .plane {
+            animation: fly 42s linear infinite;
+        }
+
+        @keyframes fly {
+            from { transform: translate(-160px, 12px); }
+            50%  { transform: translate(600px, -10px); }
+            to   { transform: translate(1360px, 10px); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .cloud, .plane { animation: none; }
+        }
+
+        /* --- Content --- */
+        .container {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 640px;
+            margin: 0 auto;
+            padding: 80px 24px 52vh;
+        }
+
+        .header {
+            margin-bottom: 48px;
+        }
+
         h1 {
-            font-size: 3rem;
+            font-size: 2.5rem;
             font-weight: 300;
-            margin-bottom: 20px;
+            margin-bottom: 12px;
             letter-spacing: -0.02em;
         }
 
         .tagline {
             font-style: italic;
-            font-size: 1.2rem;
-            color: #666;
-            margin-bottom: 40px;
+            font-size: 1.1rem;
+            color: #777;
         }
 
         .section {
-            margin-bottom: 40px;
-            text-align: left;
+            margin-bottom: 36px;
         }
 
         .section h2 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 15px;
-            color: #000;
-        }
-
-        .section p {
-            font-size: 1rem;
-            line-height: 1.5;
-            color: #555;
-            margin-bottom: 10px;
-        }
-
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .product-card {
-            background: rgba(255, 255, 255, 0.9);
-            padding: 20px;
-            border-radius: 12px;
-            text-align: center;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .product-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.15);
-        }
-
-        .product-card h3 {
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 10px;
-            color: #000;
-        }
-
-        .product-hero {
-            margin-top: 16px;
-        }
-
-        .product-hero img {
-            width: 100%;
-            height: auto;
-            border-radius: 16px;
-            border: 1px solid rgba(0, 0, 0, 0.08);
-            box-shadow: 0 12px 36px rgba(0, 0, 0, 0.12);
-        }
-
-        .accordion {
-            border: 1px solid rgba(0, 0, 0, 0.08);
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.85);
-            padding: 12px 18px;
-        }
-
-        .accordion summary {
-            font-size: 1rem;
-            font-weight: 400;
-            color: #333;
-            cursor: pointer;
-            list-style: none;
-        }
-
-        .accordion summary::-webkit-details-marker {
-            display: none;
-        }
-
-        .accordion summary::after {
-            content: "＋";
-            float: right;
-            font-size: 1.1rem;
-            margin-top: 2px;
-        }
-
-        .accordion[open] summary::after {
-            content: "−";
-        }
-
-        .accordion-content {
-            padding-top: 12px;
-        }
-
-        .blog-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 16px;
-            margin-top: 16px;
-        }
-
-        .blog-item {
-            padding: 16px;
-            border-radius: 10px;
-            background: rgba(255, 255, 255, 0.9);
-            border: 1px solid rgba(0, 0, 0, 0.06);
-        }
-
-        .blog-item h3 {
-            font-size: 1.05rem;
+            font-size: 1.15rem;
             font-weight: 600;
             margin-bottom: 8px;
             color: #000;
         }
 
-        .blog-item p {
-            margin-bottom: 0;
+        .section p {
+            font-size: 1rem;
+            color: #555;
         }
 
-        .contact-info {
-            background: #f8f9fa;
-            padding: 30px;
-            border-radius: 8px;
-            margin-top: 20px;
-        }
-
-        .contact-info h3 {
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 10px;
-            color: #000;
-        }
-
-        .contact-info p {
-            margin-bottom: 10px;
-        }
-
-        .contact-info a {
-            color: #007bff;
+        a {
+            color: #1a6acb;
             text-decoration: none;
         }
 
-        .contact-info a:hover {
+        a:hover {
             text-decoration: underline;
         }
 
         .footer {
-            margin-top: 60px;
-            padding-top: 30px;
-            border-top: 1px solid #eee;
-            font-size: 0.9rem;
+            margin-top: 56px;
+            padding-top: 24px;
+            border-top: 1px solid #e8e6e0;
+            font-size: 0.85rem;
+            color: #999;
         }
 
         @media (max-width: 768px) {
             .container {
-                padding: 20px 15px;
+                padding: 48px 20px 44vh;
             }
 
             h1 {
-                font-size: 2.5rem;
+                font-size: 2rem;
             }
 
-            .products-grid {
-                grid-template-columns: 1fr;
+            .scene {
+                height: 38vh;
             }
         }
     </style>
 </head>
 <body>
+    <div class="scene" aria-hidden="true">
+        <svg viewBox="0 0 1200 400" preserveAspectRatio="xMidYMax slice">
+            <!-- sun -->
+            <circle cx="985" cy="86" r="30" fill="#f2e6cf"/>
+
+            <!-- clouds -->
+            <g class="cloud" fill="#ffffff" opacity="0.9">
+                <rect x="0" y="70" width="104" height="20" rx="10"/>
+                <rect x="22" y="56" width="60" height="20" rx="10"/>
+            </g>
+            <g class="cloud cloud--2" fill="#ffffff" opacity="0.75">
+                <rect x="0" y="128" width="140" height="22" rx="11"/>
+                <rect x="34" y="112" width="76" height="22" rx="11"/>
+            </g>
+            <g class="cloud cloud--3" fill="#ffffff" opacity="0.6">
+                <rect x="0" y="46" width="78" height="16" rx="8"/>
+                <rect x="18" y="34" width="44" height="16" rx="8"/>
+            </g>
+
+            <!-- little plane -->
+            <g class="plane" fill="#6b6f76" opacity="0.55">
+                <path d="M0,100 L26,94 L34,84 L41,84 L38,94 L52,92 L58,86 L64,87 L60,95 L66,98 L60,101 L64,109 L58,110 L52,104 L38,102 L41,112 L34,112 L26,102 Z"/>
+            </g>
+
+            <!-- far range (Tian Shan) -->
+            <path fill="#c3ccd6" d="M0,244 L78,172 L142,208 L212,122 L302,202 L362,162 L442,216 L522,150 L602,206 L682,140 L762,202 L842,176 L932,216 L1012,158 L1092,206 L1162,180 L1200,214 L1200,400 L0,400 Z"/>
+            <!-- snow caps -->
+            <g fill="#f4f6f8">
+                <path d="M212,122 L236,149 L224,145 L213,153 L201,145 L190,149 Z"/>
+                <path d="M522,150 L544,175 L533,171 L523,178 L512,171 L502,175 Z"/>
+                <path d="M682,140 L705,166 L694,162 L683,169 L672,162 L661,166 Z"/>
+                <path d="M1012,158 L1033,182 L1023,178 L1013,185 L1003,178 L993,182 Z"/>
+            </g>
+
+            <!-- mid range -->
+            <path fill="#a9b8a6" d="M0,278 L120,218 L202,262 L282,208 L382,266 L470,222 L562,272 L662,228 L742,270 L852,218 L962,266 L1062,232 L1142,270 L1200,248 L1200,400 L0,400 Z"/>
+
+            <!-- foothills -->
+            <path fill="#8fa989" d="M0,302 L152,268 L302,302 L452,272 L602,304 L762,274 L902,302 L1052,272 L1200,300 L1200,400 L0,400 Z"/>
+
+            <!-- valley floor: field bands -->
+            <path fill="#b9cd9c" d="M0,304 C200,296 400,312 600,304 C800,296 1000,310 1200,302 L1200,340 L0,340 Z"/>
+            <path fill="#a8c389" d="M0,338 C220,332 420,346 640,338 C860,330 1020,344 1200,336 L1200,372 L0,372 Z"/>
+            <path fill="#9bba7c" d="M0,370 C240,364 460,378 700,370 C900,364 1040,376 1200,368 L1200,400 L0,400 Z"/>
+
+            <!-- field furrow lines -->
+            <g stroke="#8fb06f" stroke-width="2" opacity="0.5">
+                <path fill="none" d="M0,320 C220,313 420,327 640,319 C860,311 1020,325 1200,317"/>
+                <path fill="none" d="M0,354 C240,348 460,362 700,354 C900,348 1040,360 1200,352"/>
+                <path fill="none" d="M0,386 C260,380 480,392 720,384 C920,378 1060,390 1200,382"/>
+            </g>
+
+            <!-- poplars -->
+            <g fill="#5f7d52">
+                <ellipse cx="96" cy="296" rx="7" ry="22"/>
+                <ellipse cx="120" cy="300" rx="6" ry="18"/>
+                <ellipse cx="141" cy="297" rx="7" ry="21"/>
+                <ellipse cx="486" cy="300" rx="6" ry="19"/>
+                <ellipse cx="506" cy="296" rx="7" ry="23"/>
+                <ellipse cx="528" cy="301" rx="6" ry="17"/>
+                <ellipse cx="884" cy="298" rx="7" ry="20"/>
+                <ellipse cx="906" cy="302" rx="6" ry="16"/>
+                <ellipse cx="1088" cy="299" rx="7" ry="21"/>
+                <ellipse cx="1110" cy="303" rx="6" ry="17"/>
+            </g>
+        </svg>
+    </div>
+
+    <div class="scroll">
     <div class="container">
         <header class="header">
-           
             <h1>Fergana Labs</h1>
             <p class="tagline">Gradient descending down Fergana Valley</p>
         </header>
@@ -238,81 +259,29 @@
         <main>
             <section class="section">
                 <h2>What we do</h2>
-                <p>Fergana Labs is building memory and continual learning for consumer AI. Our mission is to enhance human agency by making your personal data work for, rather than against, you. Guided by a commitment to thoughtful design and technical breakthroughs, we’re creating experiences where technology fades into the background and people come first.</p>
+                <p>We are an applied research lab working on continual learning.</p>
             </section>
 
             <section class="section">
                 <h2>Who we are</h2>
-                <p>We are a small team of builders and researchers based in San Francisco, CA.</p>
+                <p>We are a team of builders and researchers based in San Francisco, CA.</p>
             </section>
 
             <section class="section">
                 <h2>Product</h2>
-                <p>Our product is <a href="https://joinstash.ai" target="_blank">Stash</a>, where we're exploring how personalized memory can make a big difference.</p>
-                <div class="product-hero">
-                    <a href="https://joinstash.ai" target="_blank">
-                        <img src="stash-screenshot.png" alt="Stash product screenshot">
-                    </a>
-                </div>
-            </section>
-
-            <section class="section">
-                <h2>Blog posts</h2>
-                <p>Writing on memory, research, and the messy human side of building products.</p>
-                <div class="blog-list">
-                    <div class="blog-item">
-                        <h3>Agents are Octopuses</h3>
-                        <p>Collaborative agent systems with shared memory as a new paradigm beyond swarms and assembly lines.</p>
-                        <p><a href="https://samzliu.substack.com/p/agents-are-octopuses" target="_blank">Read →</a></p>
-                    </div>
-                    <div class="blog-item">
-                        <h3>I Dropped Out of My PhD</h3>
-                        <p>Choosing the start-up life over the academic path.</p>
-                        <p><a href="https://samzliu.substack.com/p/i-dropped-out-of-my-phd" target="_blank">Read →</a></p>
-                    </div>
-                    <div class="blog-item">
-                        <h3>Why Context Windows Won't Save Us</h3>
-                        <p>Why raw context length is not a substitute for true memory in AI.</p>
-                        <p><a href="https://samzliu.substack.com/p/why-context-windows-wont-save-us" target="_blank">Read →</a></p>
-                    </div>
-                    <div class="blog-item">
-                        <h3>In Praise of Mess</h3>
-                        <p>Embracing creative disorder as a feature, not a bug.</p>
-                        <p><a href="https://samzliu.substack.com/p/in-praise-of-mess" target="_blank">Read →</a></p>
-                    </div>
-                    <div class="blog-item">
-                        <h3>Why memory is critical</h3>
-                        <p>Why memory is critical in building useful AI products.</p>
-                        <p><a href="https://henrydowling.com/background-context.html" target="_blank">Read →</a></p>
-                    </div>
-                    <div class="blog-item">
-                        <h3>Techniques to improve coding agent velocity</h3>
-                        <p>Strategies for making coding agents more autonomous and effective.</p>
-                        <p><a href="https://henrydowling.com/agent-velocity.html" target="_blank">Read →</a></p>
-                    </div>
-                    <div class="blog-item">
-                        <h3>When it Wraps, it Rhymes</h3>
-                        <p>Predicting the future of AI by looking at the past.</p>
-                        <p><a href="https://x.com/samzliu/status/2021341001655423487" target="_blank">Read →</a></p>
-                    </div>
-                    <div class="blog-item">
-                        <h3>The Real Bitter Lesson</h3>
-                        <p>The nuances behind the classic refrain.</p>
-                        <p><a href="https://x.com/samzliu/status/2034712919871819830" target="_blank">Read →</a></p>
-                    </div>
-                </div>
+                <p>Our product is <a href="https://joinstash.ai" target="_blank">Stash</a>.</p>
             </section>
 
             <section class="section">
                 <h2>Contact</h2>
-                <p>Whether you want to work with us, invest in us, make a product request, or shoot the shit - we're always excited to chat: <a href="mailto:sam@ferganalabs.com">sam@ferganalabs.com</a>. Follow us on our journey at <a href="https://x.com/ferganalabs">https://x.com/ferganalabs</a></p>
-                
+                <p>Whether you want to work with us, invest in us, or make a product request — we're always excited to chat: <a href="mailto:hi@ferganalabs.com">hi@ferganalabs.com</a>.</p>
             </section>
         </main>
 
         <footer class="footer">
             <p>&copy; 2026 Fergana Labs. All rights reserved.</p>
         </footer>
+    </div>
     </div>
 </body>
 </html>
